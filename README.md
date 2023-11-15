@@ -1,12 +1,12 @@
 # Lake Michigan Sailing Passage Conditions Analysis 2018-2022
 
 ## Table of Contents
-1. [Introduction](Readme.md#Introduction)
-2. [Data Task](Readme.md#Data-Task)
-3. [Data Processing](Readme.md#Data-Processing)
-4. [Data Cleaning and Manipulation](Readme.md#Data-Cleaning-and-Manipulation)
-5. [Analysis and Visualizations](Readme.md#Analysis-and-Visualizations)
-6. [Summary and Recommendations](Readm.md#Summary-and-Recommendations)
+1. [Introduction](README.md#Introduction)
+2. [Data Task](README.md#Data-Task)
+3. [Data Processing](README.md#Data-Processing)
+4. [Data Cleaning and Manipulation](README.md#Data-Cleaning-and-Manipulation)
+5. [Analysis and Visualizations](README.md#Analysis-and-Visualizations)
+6. [Summary and Recommendations](README.md#Summary-and-Recommendations)
 
 
 ## Introduction
