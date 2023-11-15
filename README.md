@@ -52,7 +52,7 @@ The dates of the data fields pulled from these buoys typically ran from May thro
 
 1. For the years 2020 and 2021, data was missing for May. Due to the COVID-19 pandemic, buoys those years were installed later than normal and that data is missing. Averages that are calculated for May in this project, for this reason, are 3-year averages versus the standard 5-year averages for the rest of the months in the range. 
 
-2. Many of the fields in the original raw data were listed as "99" or "999" in situations where this reading seemed inaccurate. To verify the data integrity, I reached out to a representative from the National Buoy Data Center to verify the readings. After a follow-up with NOAA, it was confirmed that readings of "99" or "999" were situations where the data was not recorded or there was a technical error with the buoy. In these situations (which occurred inconsistently across all categories) the data fields were replaced with a "null" value. 
+2. Many of the fields in the original raw data were listed as "99" or "999" in situations where the readings seemed inaccurate. To verify the data integrity, I reached out to a representative from the National Buoy Data Center to verify the readings. After a follow-up with NOAA, it was confirmed that readings of "99" or "999" were situations where the data was not recorded or there was a technical error with the buoy. In these situations (which occurred inconsistently across all categories) the data fields were replaced with a "null" value. 
 
 
 ## Data Cleaning and Manipulation
