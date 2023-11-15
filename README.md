@@ -47,7 +47,11 @@ All NOAA data from the National Buoy Data Center is unlicensed and public domain
 Once the raw data was downloaded, I renamed the data files with a naming convention based on the different buoys. "N_LM" was used to denote the north buoy no. 45002, and "S_LM" was used to denote the south buoy no. 45007. All files were then stored locally on my computer to begin cleaning and manipulating the data.
 
 #### Issues with the Data
+The dates of the data fields pulled from these buoys typically ran from May through November/December, depending on when the buoy was installed and removed that season. The sailing season on the Great Lakes is realistically May-October so these were the months that were focussed on during the analysis stage of the project. However, after initially reviewing the raw data, I encountered two main issues.
 
+1. For the years 2020 and 2021, data was missing for May. Due to the COVID-19 pandemic, buoys those years were installed later than normal and that data is missing. Averages that are calculated for May in this project, for this reason, are 3-year averages versus the standard 5-year averages for the rest of the months in the range. 
+
+2. Many of the fields in the original raw data were listed as "99" or "999" in situations where this reading seemed inaccurate. To verify the data integrity, I reached out to a representative from the National Buoy Data Center to verify the readings. After a follow-up with NOAA, it was confirmed that readings of "99" or "999" were situations where the data was not recorded or there was a technical error with the buoy. In these situations (which occurred inconsistently across all categories) the data fields were replaced with a "null" value. 
 
 
 ## Data Cleaning and Manipulation
