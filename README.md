@@ -17,7 +17,7 @@ The following is a case study analyzing weather buoy data provided by NOAA, to d
 
 ## Data Task
 
-The goal of this project is to identify when is the most opportune time to make a sailing passage from Chicago, IL to Mackinac Island, MI. Since the boat will be primarily powered by sail, certain considerations need to be made before planning a multi-day open-water sail. 
+The goal of this project is to identify when is the most opportune time to make a sailing passage from Chicago, IL to Mackinac Island, MI. Since the boat will be powered by sails, certain considerations need to be made before planning a multi-day open-water sail. 
 
 ### Primary Considerations
 
