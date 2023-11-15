@@ -56,7 +56,26 @@ The dates of the data fields pulled from these buoys typically ran from May thro
 
 ## Data Cleaning and Manipulation
 
-To clean the data, I used Microsoft Excel and logged all my changes in a [Changelog](
+To clean the data, I used Microsoft Excel and logged all my changes in a [Changelog.](https://github.com/franc136/Lake-Michigan-Sailing-Passage-Conditions-Analysis-2018-2022/blob/main/NOAA_buoy_data_project_CHANGELOG.csv)
+
+Major data changes that were applied to all 10 data files:
+
+1. The columns "_yr", "mo", and "dy" were concatenated to form one "Date" column.
+2. The columns "hr" and "mn" were concatenated to form one "Time" column.
+3. Searched readings listed as "99" or "999" and replaced them with "null" based on NOAA representative data integrity confirmation. 
+4. The row labels "WDIR" and "DegT" were combined into a single row label, "W_DIR_degT".
+5. A new column "W_SPD_knts" was created, and the wind speed was converted from m/s into knots by multiplying the m/s value by 1.944.
+6. A new column "Wv_HT_ft" was created, and the wave height was converted from meters to feet by multiplying the m value by 3.281.
+7. The column title "DPD" was changed to "Dom_wv_pd_sec". 
+8. The column title "APD" was changed to "Avg_wv_pd_sec".
+9. The column title "MPD" was changed to "Wv_DIR_degT". 
+10. The data row labels "PRES" and "hpa" were combined to create a new column label "PRES_hPa".
+11. The column "Air_Temp_degF" was created, and the degrees Celcius values were converted into degrees Fahrenheit by multiplying the DegC value by 1.8, then adding 32. 
+12. The column "Wtr_Temp_degF" was created, and the degrees Celcius values were converted into Fahrenheit by multiplying the DegC value by 1.8, then adding 32.
+13. The column "Dew_pt_degF" was created, and the degree Celcius values were converted into Fahrenheit by multiplying the DegC value by 1.8, then adding 32. 
+14. The data row labels "Vis" and "mi" were combined to rename and create the column "Vis_mi".
+15. The data row labels "TIDE" and "ft" were combined to rename and create the column "TIDE_ft".
+
 ## Analysis and Visualizations
 
 ## Summary and Recommendations
