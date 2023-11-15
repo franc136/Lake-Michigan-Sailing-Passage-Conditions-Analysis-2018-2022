@@ -36,6 +36,7 @@ To safely make an open water passage, wave height also needs to be accounted for
 
 #### Raw Data
 The raw data was downloaded from NOAA's National Buoy Data Center from the following sources:
+
 [North Lake Michigan Buoy No. 45002](https://www.ncei.noaa.gov/access/marine-environmental-buoy-database/45002.html)
 [South Lake Michigan Buoy No. 45007](https://www.ncei.noaa.gov/access/marine-environmental-buoy-database/45007.html)
 
