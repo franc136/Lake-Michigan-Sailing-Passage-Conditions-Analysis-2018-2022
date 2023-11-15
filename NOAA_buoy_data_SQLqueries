@@ -1,0 +1,1370 @@
+------------------------NORTH_LM BUOY DATA SET SQL QUERIES---------------
+--Days with SCA N_LM--
+SELECT  
+  COUNT(DISTINCT Date) AS Days_with_SCAs
+
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+
+WHERE
+  W_SPD_knts >25 or Wv_HT_ft >4
+
+ORDER BY
+1
+
+--AVG wind speed, wave height by year/month (N_LM)--
+
+SELECT  
+ 	ROUND(AVG(W_SPD_knts), 1) as avg_w_spd,
+ 	ROUND(AVG(Wv_HT_ft), 1) as avg_wv_ht,
+ _yr,
+ mo
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+mo <> 4
+AND mo <> 11
+AND mo <> 12
+GROUP BY
+4,3
+ORDER BY
+4,3
+
+
+--3-5yr-AVG wind speed, wave height, by month (N_LM)--
+
+SELECT
+ROUND(AVG(avg_w_spd), 1) as threeTofive_yr_avg_w_spd,
+ROUND(AVG(avg_wv_ht), 1) as threeTofive_yr_avg_wv_ht,
+Mo as MONTH
+FROM(
+SELECT  
+ AVG(W_SPD_knts) as avg_w_spd,
+ AVG(Wv_HT_ft) as avg_wv_ht,
+ _yr,
+ mo
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+GROUP BY
+3,4
+ORDER BY
+3,4
+)
+WHERE
+mo <> 4
+AND mo <> 11
+AND mo <> 12
+GROUP BY
+3
+
+
+
+--Number of Small Craft Advisory's by year/month 18-22
+
+SELECT  
+  COUNT(DISTINCT Date) as Total_SCAs,
+  _yr,
+  mo
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+ W_SPD_knts >25 or Wv_HT_ft >=4
+GROUP BY
+2,3
+ORDER BY
+1 ASC
+
+--3-5yr AVG SCA's by month
+
+SELECT
+ROUND(AVG(Total_SCAs), 1) as threeTofive_yr_avg_SCAs,
+mo as MONTH
+FROM(
+SELECT  
+  COUNT(DISTINCT Date) as Total_SCAs,
+  _yr,
+  mo
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+ W_SPD_knts >25 or Wv_HT_ft >=4
+GROUP BY
+2,3
+ORDER BY
+1 ASC
+)
+WHERE 
+  mo <> 4
+  AND mo <> 11
+  AND mo <> 12
+GROUP BY
+2
+ORDER BY
+1 ASC
+
+  
+
+--#Days with Ideal wind conditions occurring, total hrs_ideal conditions and AVG_tempF N_LM--
+
+SELECT  
+  COUNT(DISTINCT Date) AS total_days_Ideal_Wnd_conditions,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_conditions,
+  ROUND(AVG(Air_Temp_degF), 1) as Avg_tempF,
+  mo,
+  _yr
+
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_SPD_knts >=10 
+  and W_SPD_knts <=14
+  and Wv_HT_ft <=3
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+4,5
+ORDER BY
+4 ASC
+
+
+--#Days with Ideal wind conditions occurrences, total hours ideal conditions, and AVG_tempF, three_to_five year avg N_LM--
+
+SELECT
+ROUND(AVG(total_days_Ideal_Wnd_conditions), 1) as threeTofive_yr_day_Avg_monthly_idealConditions,
+ROUND(AVG(total_hrs_Ideal_Wnd_conditions), 1) as threeTofive_yr_hr_Avg_monthly_idealConditions,
+ROUND(AVG(Avg_tempF), 1) as threeTofive_yr_Avg_air_tempF,
+mo
+FROM
+(
+SELECT  
+  COUNT(DISTINCT Date) AS total_days_Ideal_Wnd_conditions,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_conditions,
+  ROUND(AVG(Air_Temp_degF), 1) as Avg_tempF,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_SPD_knts >=10 
+  and W_SPD_knts <=14
+  and Wv_HT_ft <=3
+  and mo <> 4
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+4,5
+ORDER BY
+2 DESC
+)
+GROUP BY
+4
+ORDER BY
+2 DESC
+
+
+
+--#Total days Ideal wind direction_ESE occurred and total ideal hours N_LM--
+
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_ESE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_ESE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_DIR_degT >=90
+  and W_DIR_degT <=130
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+
+--#Days with Ideal wind direction_ESE and total ideal hours, Three to Five year AVG N_LM--
+
+SELECT
+ROUND(AVG(Total_days_Ideal_wnd_dir_ESE), 1) AS threeTofive_yr_ESE_DIR_avg_total_days,
+ROUND(AVG(total_hrs_Ideal_Wnd_dir_ESE), 1) AS threeTofive_yr_ESE_DIR_avg_total_Hrs,
+mo
+FROM
+(
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_ESE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_ESE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_DIR_degT >=90
+  and W_DIR_degT <=130
+  and mo <> 4
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+)
+GROUP BY
+3
+ORDER By
+2 DESC
+
+
+--#Days with Ideal wind direction_WNW and total ideal hours, N_LM--
+
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_WNW,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_WNW,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_DIR_degT >=270
+  and W_DIR_degT <=310
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+
+
+--#Days with Ideal wind direction_WNW and total ideal hours, Three to Five year AVG N_LM--
+
+SELECT
+ROUND(AVG(Total_days_Ideal_wnd_dir_WNW), 1) AS threeTofive_yr_WNW_DIR_avg_total_days,
+ROUND(AVG(total_hrs_Ideal_Wnd_dir_WNW), 1) AS threeTofive_yr_WNW_DIR_avg_total_Hrs,
+mo
+FROM
+(
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_WNW,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_WNW,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_DIR_degT >=270
+  and W_DIR_degT <=310
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+)
+GROUP BY
+3
+ORDER By
+2 DESC
+
+
+--#Total days where Worst wind direction occurred & total hrs_NNE N_LM--
+
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Worst_wnd_dir_NNE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Worst_Wnd_dir_NNE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_DIR_degT >=0
+  and W_DIR_degT <=45
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+2 DESC
+
+
+--#Days with Worst wind direction_NNE and total ideal hours, Three to Five year AVG N_LM--
+
+SELECT
+ROUND(AVG(Total_days_Worst_wnd_dir_NNE), 1) AS threeTofive_yr_NNE_DIR_avg_total_days,
+ROUND(AVG(total_hrs_Worst_Wnd_dir_NNE), 1) AS threeTofive_yr_NNE_DIR_avg_total_Hrs,
+mo
+FROM
+(
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Worst_wnd_dir_NNE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Worst_Wnd_dir_NNE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+  W_DIR_degT >=0
+  and W_DIR_degT <=45
+  and mo <> 4
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+)
+GROUP BY
+3
+ORDER By
+2 
+
+
+-- Total HRS Different weather conditions and AVG air temp degF by month/year
+
+SELECT
+  ROUND(Stormy_Weather/6, 1) AS Total_hrs_Stormy_Weather,
+  ROUND(Poor_Rainy_Weather/6, 1) AS Total_hrs_Poor_Rainy_Weather,
+  ROUND(Changing_Weather/6, 1) AS Total_hrs_Changing_Weather,
+  ROUND(Fair_Weather/6, 1) AS Total_hrs_Fair_Weather,
+  ROUND(Very_Dry_Weather/6, 1) AS Total_hrs_Very_Dry_Weather,
+  Avg_Air_Temp_degF,
+  mo,
+  _yr
+FROM(
+SELECT 
+  COUNT (CASE WHEN PRES_hPa BETWEEN 965.1 AND 982.1 THEN "Stormy" ELSE NULL END) AS Stormy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 982.1 AND 1009.1 THEN "Poor_Rainy" ELSE NULL END) AS Poor_Rainy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1009.1 AND 1022.7 THEN "Changing" ELSE NULL END) AS Changing_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1022.7 AND 1049.8 THEN "Fair" ELSE NULL END) AS Fair_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1049.8 AND 1066.7 THEN "Very_Dry" ELSE NULL END) AS Very_Dry_Weather,
+  ROUND(AVG(Air_Temp_degF), 1) AS Avg_Air_Temp_degF,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+GROUP BY
+7,8
+ORDER BY
+1 DESC,2 DESC,3 DESC,4 DESC,5 DESC
+)
+WHERE
+  mo <>4
+  AND mo<> 11
+  AND mo<> 12
+GROUP BY
+1,2,3,4,5,6,7,8
+ORDER BY 
+7,8
+
+
+
+
+
+--3-5 yr AVG Hours of different weather conditions by month N_LM--
+
+SELECT
+ROUND(AVG(Total_hrs_Stormy_Weather), 1) AS threeTofive_yr_avg_hrs_Story_Weather,
+ROUND(AVG(Total_hrs_Poor_Rainy_Weather), 1) AS threeTofive_yr_avg_hrs_Poor_Rainy_Weather,
+ROUND(AVG(Total_hrs_Changing_to_Poor_Weather), 1) AS threeTofive_yr_avg_hrs_Changing_to_Poor_Weather,
+ROUND(AVG(Total_hrs_Changing_to_Fair_Weather), 1) AS threeTofive_yr_avg_hrs_Changing_to_Fair_Weather,
+ROUND(AVG(Total_hrs_Fair_Weather), 1) AS threeTofive_yr_avg_hrs_Fair_Weather,
+ROUnD(AVG(Total_hrs_Very_Dry_Weather), 1) AS threeTofive_yr_avg_hrs_Very_Dry_Weather,
+mo AS Month
+FROM(
+SELECT
+  ROUND(Stormy_Weather/6, 1) AS Total_hrs_Stormy_Weather,
+  ROUND(Poor_Rainy_Weather/6, 1) AS Total_hrs_Poor_Rainy_Weather,
+  ROUND(Changing_to_Poor_Weather/6, 1) AS Total_hrs_Changing_to_Poor_Weather,
+  ROUND(Changing_to_Fair_Weather/6, 1) AS Total_hrs_Changing_to_Fair_Weather,
+  ROUND(Fair_Weather/6, 1) AS Total_hrs_Fair_Weather,
+  ROUND(Very_Dry_Weather/6, 1) AS Total_hrs_Very_Dry_Weather,
+  mo,
+  _yr
+FROM(
+SELECT 
+  COUNT (CASE WHEN PRES_hPa BETWEEN 965.1 AND 982.1 THEN "Stormy" ELSE NULL END) AS Stormy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 982.1 AND 1009.1 THEN "Poor_Rainy" ELSE NULL END) AS Poor_Rainy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1009.1 AND 1015.9 THEN "Changing_to_Poor" ELSE NULL END) AS Changing_to_Poor_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1015.9 AND 1022.7 THEN "Changing_to_Fair" ELSE NULL END) AS Changing_to_Fair_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1022.7 AND 1049.8 THEN "Fair" ELSE NULL END) AS Fair_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1049.8 AND 1066.7 THEN "Very_Dry" ELSE NULL END) AS Very_Dry_Weather,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+GROUP BY
+7,8
+ORDER BY
+1 DESC,2 DESC,3 DESC,4 DESC,5 DESC, 6 DESC
+)
+WHERE
+  mo <>4
+  AND mo<> 11
+  AND mo<> 12
+GROUP BY
+1,2,3,4,5,6,7,8
+ORDER BY 
+7,8
+)
+GROUP BY
+7
+ORDER BY
+4 DESC
+
+
+------------------------SOUTH_LM BUOY DATA SET SQL QUERIES---------------
+
+--Days with SCA S_LM--
+SELECT  
+  COUNT(DISTINCT Date) AS Days_with_SCAs
+
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_SPD_knts >25 or Wv_HT_ft >4
+
+ORDER BY
+1
+
+--AVG wind speed, wave height by year/month (S_LM)--
+
+SELECT  
+  ROUND(AVG(W_SPD_knts), 1) as avg_w_spd,
+  ROUND(AVG(Wv_HT_ft), 1) as avg_wv_ht,
+ _yr as Year,
+ mo as Month
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+mo <> 4
+AND mo <> 11
+AND mo <> 12
+GROUP BY
+4,3
+ORDER BY
+4,3
+
+
+--3-5yr-AVG wind speed, wave height, by month (S_LM)--
+
+SELECT
+ROUND(AVG(avg_w_spd), 1) as threeTofive_yr_avg_w_spd,
+ROUND(AVG(avg_wv_ht), 1) as threeTofive_yr_avg_wv_ht,
+Month
+FROM(
+SELECT  
+ AVG(W_SPD_knts) as avg_w_spd,
+ AVG(Wv_HT_ft) as avg_wv_ht,
+ _yr AS Year,
+ mo AS Month
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+GROUP BY
+3,4
+ORDER BY
+3,4
+)
+WHERE
+Month <> 4
+AND Month <> 11
+AND Month <> 12
+GROUP BY
+3
+
+
+--Number of Small Craft Advisory's by year/month 18-22 S_LM--
+
+SELECT
+Total_SCAs,
+Year,
+Month
+FROM(
+SELECT  
+  COUNT(DISTINCT Date) as Total_SCAs,
+  _yr AS Year,
+  Mo AS Month
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+ W_SPD_knts >25 or Wv_HT_ft >=4
+GROUP BY
+2,3
+ORDER BY
+1 ASC
+)
+WHERE
+Month <>4
+AND Month <> 11
+AND Month <> 12
+
+
+--3-5yr AVG SCA's by month S_LM
+
+SELECT
+ROUND(AVG(Total_SCAs), 1) as threeTofive_yr_avg_SCAs,
+mo as MONTH
+FROM(
+SELECT  
+  COUNT(DISTINCT Date) as Total_SCAs,
+  _yr,
+  mo
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`  
+WHERE
+ W_SPD_knts >25 or Wv_HT_ft >=4
+GROUP BY
+2,3
+ORDER BY
+1 ASC
+)
+WHERE 
+  mo <> 4
+  AND mo <> 11
+  AND mo <> 12
+GROUP BY
+2
+ORDER BY 
+1
+  
+
+--#Days with Ideal wind conditions occurring, total hrs_ideal conditions and AVG_tempF S_LM--
+
+SELECT  
+  COUNT(DISTINCT Date) AS total_days_Ideal_Wnd_conditions,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_conditions,
+  ROUND(AVG(Air_Temp_degF), 1) as Avg_tempF,
+  mo,
+  _yr
+
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_SPD_knts >=10 
+  and W_SPD_knts <=14
+  and Wv_HT_ft <=3
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+4,5
+ORDER BY
+4 ASC
+
+
+--#Days with Ideal wind conditions occurrences, total hours ideal conditions, and AVG_tempF, three_to_five year avg S_LM--
+
+SELECT
+ROUND(AVG(total_days_Ideal_Wnd_conditions), 1) as threeTofive_yr_day_Avg_monthly_idealConditions,
+ROUND(AVG(total_hrs_Ideal_Wnd_conditions), 1) as threeTofive_yr_hr_Avg_monthly_idealConditions,
+ROUND(AVG(Avg_tempF), 1) as threeTofive_yr_Avg_air_tempF,
+mo
+FROM
+(
+SELECT  
+  COUNT(DISTINCT Date) AS total_days_Ideal_Wnd_conditions,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_conditions,
+  ROUND(AVG(Air_Temp_degF), 1) as Avg_tempF,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_SPD_knts >=10 
+  and W_SPD_knts <=14
+  and Wv_HT_ft <=3
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+4,5
+ORDER BY
+2 DESC
+)
+GROUP BY
+4
+ORDER BY
+4
+
+
+--#Total days Ideal wind direction_ESE occurred and total ideal hours S_LM--
+
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_ESE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_ESE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_DIR_degT >=90
+  and W_DIR_degT <=130
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+
+--#Days with Ideal wind direction_ESE and total ideal hours, Three to Five year AVG S_LM--
+
+SELECT
+ROUND(AVG(Total_days_Ideal_wnd_dir_ESE), 1) AS threeTofive_yr_ESE_DIR_avg_total_days,
+ROUND(AVG(total_hrs_Ideal_Wnd_dir_ESE), 1) AS threeTofive_yr_ESE_DIR_avg_total_Hrs,
+mo
+FROM
+(
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_ESE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_ESE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_DIR_degT >=90
+  and W_DIR_degT <=130
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+)
+GROUP BY
+3
+ORDER By
+3
+
+--#Days with Ideal wind direction_WNW and total ideal hours, S_LM--
+
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_WNW,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_WNW,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_DIR_degT >=270
+  and W_DIR_degT <=310
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+
+
+--#Days with Ideal wind direction_WNW and total ideal hours, Three to Five year AVG S_LM--
+
+SELECT
+ROUND(AVG(Total_days_Ideal_wnd_dir_WNW), 1) AS threeTofive_yr_WNW_DIR_avg_total_days,
+ROUND(AVG(total_hrs_Ideal_Wnd_dir_WNW), 1) AS threeTofive_yr_WNW_DIR_avg_total_Hrs,
+mo
+FROM
+(
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Ideal_wnd_dir_WNW,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Ideal_Wnd_dir_WNW,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_DIR_degT >=270
+  and W_DIR_degT <=310
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+)
+GROUP BY
+3
+ORDER By
+2 DESC
+
+
+--#Total days where Worst wind direction occurred & total hrs_NNE S_LM--
+
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Worst_wnd_dir_NNE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Worst_Wnd_dir_NNE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_DIR_degT >=0
+  and W_DIR_degT <=45
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+2 DESC
+
+
+--#Days with Worst wind direction_NNE and total ideal hours, Three to Five year AVG S_LM--
+
+SELECT
+ROUND(AVG(Total_days_Worst_wnd_dir_NNE), 1) AS threeTofive_yr_NNE_DIR_avg_total_days,
+ROUND(AVG(total_hrs_Worst_Wnd_dir_NNE), 1) AS threeTofive_yr_NNE_DIR_avg_total_Hrs,
+mo
+FROM
+(
+SELECT 
+  COUNT(DISTINCT Date) AS Total_days_Worst_wnd_dir_NNE,
+  ROUND((COUNT(time)/6), 1) AS total_hrs_Worst_Wnd_dir_NNE,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+WHERE
+  W_DIR_degT >=0
+  and W_DIR_degT <=45
+  and mo <> 11
+  and mo <> 12
+GROUP BY
+3,4
+ORDER BY
+1 DESC,
+2
+)
+GROUP BY
+3
+ORDER By
+2 DESC
+
+
+-- Total HRS Different weather conditions and AVG air temp degF by month/year S_LM
+
+SELECT
+  ROUND(Stormy_Weather/6, 1) AS Total_hrs_Stormy_Weather,
+  ROUND(Poor_Rainy_Weather/6, 1) AS Total_hrs_Poor_Rainy_Weather,
+  ROUND(Changing_Weather/6, 1) AS Total_hrs_Changing_Weather,
+  ROUND(Fair_Weather/6, 1) AS Total_hrs_Fair_Weather,
+  ROUND(Very_Dry_Weather/6, 1) AS Total_hrs_Very_Dry_Weather,
+  Avg_Air_Temp_degF,
+  mo,
+  _yr
+FROM(
+SELECT 
+  COUNT (CASE WHEN PRES_hPa BETWEEN 965.1 AND 982.1 THEN "Stormy" ELSE NULL END) AS Stormy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 982.1 AND 1009.1 THEN "Poor_Rainy" ELSE NULL END) AS Poor_Rainy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1009.1 AND 1022.7 THEN "Changing" ELSE NULL END) AS Changing_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1022.7 AND 1049.8 THEN "Fair" ELSE NULL END) AS Fair_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1049.8 AND 1066.7 THEN "Very_Dry" ELSE NULL END) AS Very_Dry_Weather,
+  ROUND(AVG(Air_Temp_degF), 1) AS Avg_Air_Temp_degF,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022`
+GROUP BY
+7,8
+ORDER BY
+1 DESC,2 DESC,3 DESC,4 DESC,5 DESC
+)
+WHERE
+  mo <>4
+  AND mo<> 11
+  AND mo<> 12
+GROUP BY
+1,2,3,4,5,6,7,8
+ORDER BY 
+7,8
+
+
+
+
+
+
+
+--3-5 yr AVG Hours of different weather conditions by month S_LM--
+
+SELECT
+ROUND(AVG(Total_hrs_Stormy_Weather), 1) AS threeTofive_yr_avg_hrs_Story_Weather,
+ROUND(AVG(Total_hrs_Poor_Rainy_Weather), 1) AS threeTofive_yr_avg_hrs_Poor_Rainy_Weather,
+ROUND(AVG(Total_hrs_Changing_to_Poor_Weather), 1) AS threeTofive_yr_avg_hrs_Changing_to_Poor_Weather,
+ROUND(AVG(Total_hrs_Changing_to_Fair_Weather), 1) AS threeTofive_yr_avg_hrs_Changing_to_Fair_Weather,
+ROUND(AVG(Total_hrs_Fair_Weather), 1) AS threeTofive_yr_avg_hrs_Fair_Weather,
+ROUnD(AVG(Total_hrs_Very_Dry_Weather), 1) AS threeTofive_yr_avg_hrs_Very_Dry_Weather,
+mo AS Month
+FROM(
+SELECT
+  ROUND(Stormy_Weather/6, 1) AS Total_hrs_Stormy_Weather,
+  ROUND(Poor_Rainy_Weather/6, 1) AS Total_hrs_Poor_Rainy_Weather,
+  ROUND(Changing_to_Poor_Weather/6, 1) AS Total_hrs_Changing_to_Poor_Weather,
+  ROUND(Changing_to_Fair_Weather/6, 1) AS Total_hrs_Changing_to_Fair_Weather,
+  ROUND(Fair_Weather/6, 1) AS Total_hrs_Fair_Weather,
+  ROUND(Very_Dry_Weather/6, 1) AS Total_hrs_Very_Dry_Weather,
+  mo,
+  _yr
+FROM(
+SELECT 
+  COUNT (CASE WHEN PRES_hPa BETWEEN 965.1 AND 982.1 THEN "Stormy" ELSE NULL END) AS Stormy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 982.1 AND 1009.1 THEN "Poor_Rainy" ELSE NULL END) AS Poor_Rainy_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1009.1 AND 1015.9 THEN "Changing_to_Poor" ELSE NULL END) AS Changing_to_Poor_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1015.9 AND 1022.7 THEN "Changing_to_Fair" ELSE NULL END) AS Changing_to_Fair_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1022.7 AND 1049.8 THEN "Fair" ELSE NULL END) AS Fair_Weather,
+  COUNT (CASE WHEN PRES_hPa BETWEEN 1049.8 AND 1066.7 THEN "Very_Dry" ELSE NULL END) AS Very_Dry_Weather,
+  mo,
+  _yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+GROUP BY
+7,8
+ORDER BY
+1 DESC,2 DESC,3 DESC,4 DESC,5 DESC, 6 DESC
+)
+WHERE
+  mo <>4
+  AND mo<> 11
+  AND mo<> 12
+GROUP BY
+1,2,3,4,5,6,7,8
+ORDER BY 
+7,8
+)
+GROUP BY
+7
+ORDER BY
+4 DESC
+
+
+--------------------SUMMARY--------------------------------------
+
+--Ideal WNW_Total HRS in September by Week_NLM
+
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_WNW,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_WNW,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_WNW,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_WNW,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_WNW,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS WNW_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+W_DIR_degT >=270
+AND W_DIR_degT <=310
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+
+--5 yr AVG Ideal WNW_Total HRS in September by Week_NLM
+SELECT
+ROUND(AVG(SEPT_WK1_HRS_WNW),1) AS NLM_Five_yr_AVG_SEPT_WK1_HRS_WNW,
+ROUND(AVG(SEPT_WK2_HRS_WNW),1) AS NLM_Five_yr_AVG_SEPT_WK2_HRS_WNW,
+ROUND(AVG(SEPT_WK3_HRS_WNW),1) AS NLM_Five_yr_AVG_SEPT_WK3_HRS_WNW,
+ROUND(AVG(SEPT_WK4_HRS_WNW),1) AS NLM_Five_yr_AVG_SEPT_WK4_HRS_WNW,
+ROUND(AVG(SEPT_PWK5_HRS_WNW),1) AS NLM_Five_yr_AVG_SEPT_PWK5_HRS_WNW,
+FROM
+(
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_WNW,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_WNW,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_WNW,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_WNW,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_WNW,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS WNW_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+W_DIR_degT >=270
+AND W_DIR_degT <=310
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+)
+
+
+
+
+
+
+
+
+
+
+--5 yr AVG Ideal ESE_Total HRS in September by Week_NLM
+SELECT
+ROUND(AVG(SEPT_WK1_HRS_ESE),1) AS NLM_Five_yr_AVG_SEPT_WK1_HRS_ESE,
+ROUND(AVG(SEPT_WK2_HRS_ESE),1) AS NLM_Five_yr_AVG_SEPT_WK2_HRS_ESE,
+ROUND(AVG(SEPT_WK3_HRS_ESE),1) AS NLM_Five_yr_AVG_SEPT_WK3_HRS_ESE,
+ROUND(AVG(SEPT_WK4_HRS_ESE),1) AS NLM_Five_yr_AVG_SEPT_WK4_HRS_ESE,
+ROUND(AVG(SEPT_PWK5_HRS_ESE),1) AS NLM_Five_yr_AVG_SEPT_PWK5_HRS_ESE,
+FROM
+(
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_ESE,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_ESE,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_ESE,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_ESE,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_ESE,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS ESE_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+W_DIR_degT >=90
+AND W_DIR_degT <=130
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+)
+
+
+
+
+
+
+
+
+
+
+--5 yr AVG Ideal NNE_Total HRS in September by Week_NLM
+SELECT
+ROUND(AVG(SEPT_WK1_HRS_NNE),1) AS Five_yr_AVG_SEPT_WK1_HRS_NNE,
+ROUND(AVG(SEPT_WK2_HRS_NNE),1) AS Five_yr_AVG_SEPT_WK2_HRS_NNE,
+ROUND(AVG(SEPT_WK3_HRS_NNE),1) AS Five_yr_AVG_SEPT_WK3_HRS_NNE,
+ROUND(AVG(SEPT_WK4_HRS_NNE),1) AS Five_yr_AVG_SEPT_WK4_HRS_NNE,
+ROUND(AVG(SEPT_PWK5_HRS_NNE),1) AS Five_yr_AVG_SEPT_PWK5_HRS_NNE,
+FROM
+(
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_NNE,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_NNE,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_NNE,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_NNE,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_NNE,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS NNE_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+W_DIR_degT >=0
+AND W_DIR_degT <=45
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+)
+
+
+
+
+
+
+
+
+
+
+--5 yr AVG Ideal WNW_Total HRS in September by Week_SLM
+SELECT
+ROUND(AVG(SEPT_WK1_HRS_WNW),1) AS SLM_Five_yr_AVG_SEPT_WK1_HRS_WNW,
+ROUND(AVG(SEPT_WK2_HRS_WNW),1) AS SLM_Five_yr_AVG_SEPT_WK2_HRS_WNW,
+ROUND(AVG(SEPT_WK3_HRS_WNW),1) AS SLM_Five_yr_AVG_SEPT_WK3_HRS_WNW,
+ROUND(AVG(SEPT_WK4_HRS_WNW),1) AS SLM_Five_yr_AVG_SEPT_WK4_HRS_WNW,
+ROUND(AVG(SEPT_PWK5_HRS_WNW),1) AS SLM_Five_yr_AVG_SEPT_PWK5_HRS_WNW,
+FROM
+(
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_WNW,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_WNW,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_WNW,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_WNW,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_WNW,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS WNW_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+W_DIR_degT >=270
+AND W_DIR_degT <=310
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+)
+
+
+
+
+
+
+
+
+--5 yr AVG Ideal ESE_Total HRS in September by Week_SLM
+SELECT
+ROUND(AVG(SEPT_WK1_HRS_ESE),1) AS SLM_Five_yr_AVG_SEPT_WK1_HRS_ESE,
+ROUND(AVG(SEPT_WK2_HRS_ESE),1) AS SLM_Five_yr_AVG_SEPT_WK2_HRS_ESE,
+ROUND(AVG(SEPT_WK3_HRS_ESE),1) AS SLM_Five_yr_AVG_SEPT_WK3_HRS_ESE,
+ROUND(AVG(SEPT_WK4_HRS_ESE),1) AS SLM_Five_yr_AVG_SEPT_WK4_HRS_ESE,
+ROUND(AVG(SEPT_PWK5_HRS_ESE),1) AS SLM_Five_yr_AVG_SEPT_PWK5_HRS_ESE,
+FROM
+(
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_ESE,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_ESE,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_ESE,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_ESE,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_ESE,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS ESE_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+W_DIR_degT >=90
+AND W_DIR_degT <=130
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+)
+
+
+
+
+
+
+
+
+
+--5 yr AVG Ideal NNE_Total HRS in September by Week_SLM
+SELECT
+ROUND(AVG(SEPT_WK1_HRS_NNE),1) AS SLM_Five_yr_AVG_SEPT_WK1_HRS_NNE,
+ROUND(AVG(SEPT_WK2_HRS_NNE),1) AS SLM_Five_yr_AVG_SEPT_WK2_HRS_NNE,
+ROUND(AVG(SEPT_WK3_HRS_NNE),1) AS SLM_Five_yr_AVG_SEPT_WK3_HRS_NNE,
+ROUND(AVG(SEPT_WK4_HRS_NNE),1) AS SLM_Five_yr_AVG_SEPT_WK4_HRS_NNE,
+ROUND(AVG(SEPT_PWK5_HRS_NNE),1) AS SLM_Five_yr_AVG_SEPT_PWK5_HRS_NNE,
+FROM
+(
+SELECT
+ROUND(SUM(WK1)/6,1) AS SEPT_WK1_HRS_NNE,
+ROUND(SUM(WK2)/6,1) AS SEPT_WK2_HRS_NNE,
+ROUND(SUM(WK3)/6,1) AS SEPT_WK3_HRS_NNE,
+ROUND(SUM(WK4)/6,1) AS SEPT_WK4_HRS_NNE,
+ROUND(SUM(PWK5)/6,1) AS SEPT_PWK5_HRS_NNE,
+_yr
+FROM
+(
+SELECT 
+W_DIR_degT AS NNE_wind,
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS PWK5,
+Date,
+Time,
+mo,
+_yr
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+W_DIR_degT >=0
+AND W_DIR_degT <=45
+AND mo = 9
+GROUP BY
+1,7,8,9,10
+ORDER BY
+7
+)
+GROUP BY
+6
+ORDER BY
+6 ASC
+)
+
+
+
+
+
+
+
+
+
+--Five Year AVG SEPT Hours Fair Weather by Week_SLM
+SELECT
+ROUND(AVG(SEPT_WK1_Fair),1) AS SLM_Five_yr_AVG_SEPT_WK1_Hrs_Fair,
+ROUND(AVG(SEPT_WK2_Fair),1) AS SLM_Five_yr_AVG_SEPT_WK2_Hrs_Fair,
+ROUND(AVG(SEPT_WK3_Fair),1) AS SLM_Five_yr_AVG_SEPT_WK3_Hrs_Fair,
+ROUND(AVG(SEPT_WK4_Fair),1) AS SLM_Five_yr_AVG_SEPT_WK4_Hrs_Fair,
+ROUND(AVG(SEPT_PWK5_Fair),1) AS SLM_Five_yr_AVG_SEPT_PWK5_Hrs_Fair,
+FROM
+(
+SELECT
+ROUND(SUM(SLM_WK1)/6,1) AS SEPT_WK1_Fair,
+ROUND(SUM(SLM_WK2)/6,1) AS SEPT_WK2_Fair,
+ROUND(SUM(SLM_WK3)/6,1) AS SEPT_WK3_Fair,
+ROUND(SUM(SLM_WK4)/6,1) AS SEPT_WK4_Fair,
+ROUND(SUM(SLM_PWK5)/6,1) AS SEPT_PWK5_Fair,
+_yr
+FROM
+(
+SELECT 
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS SLM_WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS SLM_WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS SLM_WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS SLM_WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS SLM_PWK5,
+time,
+dy,
+mo,
+_yr,
+PRES_hPa AS Fair_Weather
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+mo = 9
+AND PRES_hPa BETWEEN 1022.7 AND 1049.8 
+GROUP BY
+6,7,8,9,10
+ORDER BY
+9
+)
+GROUP BY
+6
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--Five Year AVG SEPT Hours Fair Weather by Week_NLM
+SELECT
+ROUND(AVG(SEPT_WK1_Fair),1) AS NLM_Five_yr_AVG_SEPT_WK1_Hrs_Fair,
+ROUND(AVG(SEPT_WK2_Fair),1) AS NLM_Five_yr_AVG_SEPT_WK2_Hrs_Fair,
+ROUND(AVG(SEPT_WK3_Fair),1) AS NLM_Five_yr_AVG_SEPT_WK3_Hrs_Fair,
+ROUND(AVG(SEPT_WK4_Fair),1) AS NLM_Five_yr_AVG_SEPT_WK4_Hrs_Fair,
+ROUND(AVG(SEPT_PWK5_Fair),1) AS NLM_Five_yr_AVG_SEPT_PWK5_Hrs_Fair,
+FROM
+(
+SELECT
+ROUND(SUM(NLM_WK1)/6,1) AS SEPT_WK1_Fair,
+ROUND(SUM(NLM_WK2)/6,1) AS SEPT_WK2_Fair,
+ROUND(SUM(NLM_WK3)/6,1) AS SEPT_WK3_Fair,
+ROUND(SUM(NLM_WK4)/6,1) AS SEPT_WK4_Fair,
+ROUND(SUM(NLM_PWK5)/6,1) AS SEPT_PWK5_Fair,
+_yr
+FROM
+(
+SELECT 
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS NLM_WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS NLM_WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS NLM_WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS NLM_WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS NLM_PWK5,
+time,
+dy,
+mo,
+_yr,
+PRES_hPa AS Fair_Weather
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+mo = 9
+AND PRES_hPa BETWEEN 1022.7 AND 1049.8 
+GROUP BY
+6,7,8,9,10
+ORDER BY
+9
+)
+GROUP BY
+6
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--Five Year AVG SEPT Hours Poor_Rainy Weather by Week_SLM
+SELECT
+ROUND(AVG(SEPT_WK1_Poor_Rainy),1) AS SLM_Five_yr_AVG_SEPT_WK1_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_WK2_Poor_Rainy),1) AS SLM_Five_yr_AVG_SEPT_WK2_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_WK3_Poor_Rainy),1) AS SLM_Five_yr_AVG_SEPT_WK3_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_WK4_Poor_Rainy),1) AS SLM_Five_yr_AVG_SEPT_WK4_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_PWK5_Poor_Rainy),1) AS SLM_Five_yr_AVG_SEPT_PWK5_Hrs_Poor_Rainy,
+FROM
+(
+SELECT
+ROUND(SUM(SLM_WK1)/6,1) AS SEPT_WK1_Poor_Rainy,
+ROUND(SUM(SLM_WK2)/6,1) AS SEPT_WK2_Poor_Rainy,
+ROUND(SUM(SLM_WK3)/6,1) AS SEPT_WK3_Poor_Rainy,
+ROUND(SUM(SLM_WK4)/6,1) AS SEPT_WK4_Poor_Rainy,
+ROUND(SUM(SLM_PWK5)/6,1) AS SEPT_PWK5_Poor_Rainy,
+_yr
+FROM
+(
+SELECT 
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS SLM_WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS SLM_WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS SLM_WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS SLM_WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS SLM_PWK5,
+time,
+dy,
+mo,
+_yr,
+PRES_hPa AS Poor_Rainy_Weather
+FROM `noaa-lakemichigan-buoys.S_LM_45007.S_LM_2018_2022` 
+WHERE
+mo = 9
+AND PRES_hPa BETWEEN 982.1 AND 1009.1 
+GROUP BY
+6,7,8,9,10
+ORDER BY
+9
+)
+GROUP BY
+6
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--Five Year AVG SEPT Hours Poor_Rainy Weather by Week_NLM
+SELECT
+ROUND(AVG(SEPT_WK1_Poor_Rainy),1) AS NLM_Five_yr_AVG_SEPT_WK1_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_WK2_Poor_Rainy),1) AS NLM_Five_yr_AVG_SEPT_WK2_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_WK3_Poor_Rainy),1) AS NLM_Five_yr_AVG_SEPT_WK3_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_WK4_Poor_Rainy),1) AS NLM_Five_yr_AVG_SEPT_WK4_Hrs_Poor_Rainy,
+ROUND(AVG(SEPT_PWK5_Poor_Rainy),1) AS NLM_Five_yr_AVG_SEPT_PWK5_Hrs_Poor_Rainy,
+FROM
+(
+SELECT
+ROUND(SUM(NLM_WK1)/6,1) AS SEPT_WK1_Poor_Rainy,
+ROUND(SUM(NLM_WK2)/6,1) AS SEPT_WK2_Poor_Rainy,
+ROUND(SUM(NLM_WK3)/6,1) AS SEPT_WK3_Poor_Rainy,
+ROUND(SUM(NLM_WK4)/6,1) AS SEPT_WK4_Poor_Rainy,
+ROUND(SUM(NLM_PWK5)/6,1) AS SEPT_PWK5_Poor_Rainy,
+_yr
+FROM
+(
+SELECT 
+COUNT(CASE WHEN dy between 1 and 7 THEN "WK 1" ELSE NULL END) AS NLM_WK1,
+COUNT(CASE WHEN dy between 8 and 14 THEN "WK 2" ELSE NULL END) AS NLM_WK2,
+COUNT(CASE WHEN dy between 15 and 21 THEN "WK 3" ELSE NULL END) AS NLM_WK3,
+COUNT(CASE WHEN dy between 22 and 28 THEN "WK 4" ELSE NULL END) AS NLM_WK4,
+COUNT(CASE WHEN dy between 29 and 30 THEN "P_WK 5" ELSE NULL END) AS NLM_PWK5,
+time,
+dy,
+mo,
+_yr,
+PRES_hPa AS Poor_Rainy_Weather
+FROM `noaa-lakemichigan-buoys.N_LM_45002.N_LM_2018_2022` 
+WHERE
+mo = 9
+AND PRES_hPa BETWEEN 982.1 AND 1009.1 
+GROUP BY
+6,7,8,9,10
+ORDER BY
+9
+)
+GROUP BY
+6
+)
+
