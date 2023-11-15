@@ -34,6 +34,21 @@ To safely make an open water passage, wave height also needs to be accounted for
 
 ## Data Processing
 
+#### Raw Data
+The raw data was downloaded from NOAA's National Buoy Data Center from the following sources:
+[North Lake Michigan Buoy No. 45002](https://www.ncei.noaa.gov/access/marine-environmental-buoy-database/45002.html)
+[South Lake Michigan Buoy No. 45007](https://www.ncei.noaa.gov/access/marine-environmental-buoy-database/45007.html)
+
+#### Data Licensing
+All NOAA data from the National Buoy Data Center is unlicensed and public domain.
+
+#### Data Organization
+Once the raw data was downloaded, I renamed the data files with a naming convention based on the different buoys. "N_LM" was used to denote the north buoy no. 45002, and "S_LM" was used to denote the south buoy no. 45007. All files were then stored locally on my computer to begin cleaning and manipulating the data.
+
+#### Issues with the Data
+
+
+
 ## Data Cleaning and Manipulation
 
 ## Analysis and Visualizations
