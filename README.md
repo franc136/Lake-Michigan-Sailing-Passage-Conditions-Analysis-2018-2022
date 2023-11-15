@@ -54,9 +54,9 @@ The dates of the data fields pulled from these buoys typically ran from May thro
 
 2. Many of the fields in the original raw data were listed as "99" or "999" in situations where the readings seemed inaccurate. To verify the data integrity, I reached out to a representative from the National Buoy Data Center to verify the readings. After a follow-up with NOAA, it was confirmed that readings of "99" or "999" were situations where the data was not recorded or there was a technical error with the buoy. In these situations (which occurred inconsistently across all categories) the data fields were replaced with a "null" value. 
 
-
 ## Data Cleaning and Manipulation
 
+To clean the data, I used Microsoft Excel and logged all my changes in a [Changelog](
 ## Analysis and Visualizations
 
 ## Summary and Recommendations
