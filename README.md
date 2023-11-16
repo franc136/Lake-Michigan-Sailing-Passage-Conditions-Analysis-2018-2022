@@ -161,3 +161,18 @@ May saw the highest average hours of ideal wind direction at 54 hours/month out 
 Looking at conditions with the worst possible wind direction for the trip, August had the highest average hours of winds out of the (NNE) at 122.2 hours/month, while October had the lowest average hours at 80.9 hours/month. 
 
 ## Summary and Recommendations
+
+After considering all conditions for both buoys, September consistently ranked highly for the majority of categories and proved to be the best month for the passage.
+
+1. September was the only month where average wind speeds and wave height fell within the ideal conditions (10-14knt wind speed, <=3ft) for both buoys.
+2. September had the highest combined average hours of "Fair" and "Changing to Fair" weather conditions for both buoys.
+3. September had an average air temperature above 60 °F for both buoys, which makes for very comfortable sailing weather.
+4. September ranked first and third for the highest average days/month where ideal sailing conditions occurred and hours/month of ideal sailing conditions.
+5. September ranked second and third highest for average hours/month of ideal wind direction conditions for both buoys.
+6. September randed second and third lowest in days/month of worst wind direction conditions for both buoys.
+
+### September Weekly Conditions Summary
+
+![September Weekly Conditions](/Images/Sept_Smry.png)
+
+### Passage Recommendations
