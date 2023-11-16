@@ -173,6 +173,8 @@ After considering all conditions for both buoys, September consistently ranked h
 
 ### September Weekly Conditions Summary
 
+To take the analysis one step further, once September was identified as the most ideal month for the passage, I analyzed ideal and worst wind direction as well as ideal and worst weather conditions by month. 
+
 ![September Weekly Conditions](/Images/Sept_Smry.png)
 
 ### Passage Recommendations
