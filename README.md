@@ -147,5 +147,12 @@ Looking at conditions with the worst possible wind direction for the trip, July 
 
 ![North Buoy Visualizations](/Images/N_Wind.png)
 
+###### Ideal Sailing Conditions
+In the north of the lake, August had the highest average amount of days where ideal conditions occurred at 26.6 days/month, as well as the highest average of hours of ideal sailing conditions at 28.1 hours/month. 
+
+###### Wind Direction
+May saw the highest average hours of ideal wind direction at 54 hours/month out of the (ESE), while October had the highest average hours of ideal wind direction at 91.9 hours/month out of the (WNW). July experienced the lowest average hours of ideal wind direction out of the (ESE) with 23.9 hours/month, while May experienced the lowest ideal wind direction out of the (WNW) with 29.3 hours/month.
+
+Looking at conditions with the worst possible wind direction for the trip, August had the highest average hours of winds out of the (NNE) at 122.2 hours/month, while October had the lowest average hours at 80.9 hours/month. 
 
 ## Summary and Recommendations
