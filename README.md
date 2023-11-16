@@ -129,9 +129,21 @@ October experienced the most SCA's with an average of 18.4, while May had the le
 
 
 ### Wind Conditions
+Next, I analyzed different wind conditions including, average hours of ideal sailing conditions, average hours of ideal wind directions, and average hours of worst possible wind direction. To define ideal sailing conditions, wind speed had to be between 10-14 knots and wave height had to be <=3ft. 
 
 #### South Buoy No. 45007
+
+![South Buoy Visualizations](/Images/S_Wind.png)
+
+###### Ideal Sailing Conditions
+In the south of the lake, August had the highest average amount of days where ideal conditions occurred, but September had the highest average of hours of ideal sailing conditions, at 26.8 hours/month. 
+
+###### Wind Direction
+October saw the highest average hours of ideal wind direction with 57.4 hours/month out of the (ESE) and 70.1 hours/month out of the (WNW). July experienced the lowest average hours of ideal wind direction out of the (ESE) with 24.1 hours/month, while May experienced the lowest ideal wind direction out of the (WNW) with 28.1 hours/month.
+
+Looking at conditions with the worst possible wind direction for the trip, July had the highest average hours of winds out of the (NNE) at 96.8 hours/month, while May had the lowest average hours at 45.3 hours/month. 
+
 #### North Buoy No. 45002
 
-
+![North Buoy Visualizations](/Images/N_Wind.png)
 ## Summary and Recommendations
