@@ -22,7 +22,7 @@ The goal of this project is to identify when is the most opportune time to make 
 ### Primary Considerations
 
 #### Wind Speed
-First and foremost, the number one consideration is that there needs to be wind. Little or no  wind at all, makes for a very slow, boring, and overall unenjoyable sailing trip. Typically, ideal wind conditions that power the boat well but are still comfortable to manage, fall between 10-14 knots. This is a subjective measurement but for this project, we will call 10-14knts ideal wind conditions. 
+First and foremost, the number one consideration is that there needs to be wind. Little or no  wind at all, makes for a very slow, boring, and overall unenjoyable sailing trip. Typically, ideal wind conditions that power the boat well but are still comfortable to manage, fall between 10-14 knots. This is a subjective measurement but for this project, we will call 10-14 knots ideal wind conditions. 
 
 #### Wind Direction
 The second consideration that needs to be taken into account is wind direction. The physics of sailing does not allow for a sailboat to travel directly into the wind, and based on where the wind is crossing over the boat, dictates where the sails need to be positioned, the degree of heel the boat experiences, and the overall boat speed. The fastest and most comfortable point of sail is called a "beam reach" and this occurs when the boat is traveling perpendicular to the wind direction. The bearing for the sailing route from Chicago, IL to Mackinac Island, MI is primarily NNE (0°-45°), so the ideal wind direction for this trip would need to be coming out of the ESE (90°-130°) or from the WNW (270°-310°.) The worst wind direction for the trip would be the direct point of travel which is primarily NNE (0°-45°.)
