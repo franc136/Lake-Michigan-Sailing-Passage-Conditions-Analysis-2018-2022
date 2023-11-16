@@ -63,7 +63,7 @@ Major data changes that were applied to all 10 data files:
 1. The columns "_yr", "mo", and "dy" were concatenated to form one "Date" column.
 2. The columns "hr" and "mn" were concatenated to form one "Time" column.
 3. Searched readings listed as "99" or "999" and replaced them with "null" based on NOAA representative data integrity confirmation. 
-4. The row labels "WDIR" and "DegT" were combined into a single row label, "W_DIR_degT".
+4. The row labels "WDIR" and "DegT" were combined into a single column label, "W_DIR_degT".
 5. A new column "W_SPD_knts" was created, and the wind speed was converted from m/s into knots by multiplying the m/s value by 1.944.
 6. A new column "Wv_HT_ft" was created, and the wave height was converted from meters to feet by multiplying the m value by 3.281.
 7. The column title "DPD" was changed to "Dom_wv_pd_sec". 
