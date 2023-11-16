@@ -146,4 +146,6 @@ Looking at conditions with the worst possible wind direction for the trip, July 
 #### North Buoy No. 45002
 
 ![North Buoy Visualizations](/Images/N_Wind.png)
+
+
 ## Summary and Recommendations
