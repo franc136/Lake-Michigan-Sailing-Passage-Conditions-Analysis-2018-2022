@@ -78,4 +78,30 @@ Major data changes that were applied to all 10 data files:
 
 ## Analysis and Visualizations
 
+Once the 10 data files for the North and South buoys were cleaned, I created two combined (2018-2022) .csv files for each buoy's data and uploaded the files into BigQuery. 
+
+All analysis was performed in SQL, and the queries used in this case study can be reviewed [here.]( https://github.com/franc136/Lake-Michigan-Sailing-Passage-Conditions-Analysis-2018-2022/blob/main/NOAA_buoy_data_SQLqueries)
+
+All visualizations were created in Tableau Public and the interactive dashboards can be explored and accessed [here.](https://public.tableau.com/app/profile/sean.francis6127/viz/LakeMichiganSailingPassage-ConditionsAnalysis2018-2022/Story1#1)
+
+### Atmosphere and Lake Conditions 
+To begin my analysis, I first looked at the general atmospheric conditions of the lake, along with surface conditions such as average wind speeds and wave heights. To define the weather conditions, each category represents a range of barometric pressures (hPa). The ranges come from displays typically used on a barometer face. Ranges as follows:
+Very Dry Weather (1049.8 - 1066.7 hPa)
+Fair Weather (1022.7 - 1049.8 hPa)
+Changing to Fair Weather (1015.9 -1022.7 hPa)
+Changing to Poor Weather (1009.1 - 1015.9 hPa)
+Poor/Rainy Weather (982.1 - 1009.1 hPa)
+Stormy Weather (965.1 - 982.1 hPa)
+
+#### South Buoy No. 45007
+
+#### North Buoy No. 45002
+
+#### Weather Conditions
+I
+### Atmosphere and Lake Conditions - North Buoy No. 45002
+### Wind Conditions - South Buoy No. 45007
+### Wind Conditions - North Buoy No. 45002
+
+
 ## Summary and Recommendations
