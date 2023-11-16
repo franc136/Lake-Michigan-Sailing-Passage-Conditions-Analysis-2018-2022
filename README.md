@@ -115,7 +115,7 @@ October experienced the highest average wind speeds at 14.1 knots, as well as th
 May saw the lowest average wind speed at 7.8 knots, while July had the lowest average wave height of 1.4ft.
 
 ###### Small Craft Advisories
-October experienced the most SCA's with an average of 20.4, while May had the lease amount with an average of 1.7.
+October experienced the most SCA's with an average of 20.4, while May had the lowest amount with an average of 1.7.
 
 #### North Buoy No. 45002
 
@@ -130,7 +130,7 @@ October experienced the highest average wind speeds at 14.2 knots, as well as th
 May saw the lowest average wind speed at 7.6 knots, while July had the lowest average wave height of 1.4ft.
 
 ###### Small Craft Advisories
-October experienced the most SCA's with an average of 18.4, while May had the lease amount with an average of 3.5.
+October experienced the most SCA's with an average of 18.4, while May had the lowest amount with an average of 3.5.
 
 
 ### Wind Conditions
@@ -171,9 +171,11 @@ After considering all conditions for both buoys, September consistently ranked h
 5. September ranked second and third highest for average hours/month of ideal wind direction conditions for both buoys.
 6. September randed second and third lowest in days/month of worst wind direction conditions for both buoys.
 
+The only issue with September is that it ranked second for most Small Craft Advisories/month for both buoys. 
+
 ### September Weekly Conditions Summary
 
-To take the analysis one step further, once September was identified as the most ideal month for the passage, I analyzed ideal and worst wind direction as well as ideal and worst weather conditions by month. 
+To take the analysis one step further, once September was identified as the most ideal month for the passage, I analyzed ideal and worst wind direction conditions as well as ideal and worst weather conditions by month. 
 
 ![September Weekly Conditions](/Images/Sept_Smry.png)
 
@@ -182,7 +184,7 @@ To take the analysis one step further, once September was identified as the most
 After reviewing the conditions by week, I would recommend that the best time for a passage from Chicago, IL to Mackinac Island, MI would be during the second week of September (9/8-9/14.)
 
 1. The second week had the most consistent average hours of ideal wind direction conditions.
-2. The second week had average hours of "Fair" weather ranging from high to average compared to the other weeks.
+2. The second week had average hours of "Fair" weather ranging from high to average, compared to the other weeks.
 3. The second week had below-average hours of "Poor/Rainy" weather.
 
 The only issue the second week may encounter is the possibility of above-average hours of (NNE) wind direction conditions on the north end of the passage, but for the reasons highlighted above, I would still recommend the second week as an overall recommendation.
