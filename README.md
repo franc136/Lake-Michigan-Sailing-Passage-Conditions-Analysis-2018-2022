@@ -169,7 +169,7 @@ After considering all conditions for both buoys, September consistently ranked h
 3. September had an average air temperature above 60 °F for both buoys, which makes for very comfortable sailing weather.
 4. September ranked first and third for the highest average days/month where ideal sailing conditions occurred and hours/month of ideal sailing conditions.
 5. September ranked second and third highest for average hours/month of ideal wind direction conditions for both buoys.
-6. September randed second and third lowest in days/month of worst wind direction conditions for both buoys.
+6. September ranked second and third lowest in days/month of worst wind direction conditions for both buoys.
 
 The only issue with September is that it ranked second for most Small Craft Advisories/month for both buoys. 
 
