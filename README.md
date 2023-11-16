@@ -97,21 +97,41 @@ Stormy Weather (965.1 - 982.1 hPa)
 A Small Craft Advisory is another indicator that was used to track conditions on the lake. A Small Craft Advisory is a weather warning broadcast by NOAA as a part of their marine forecast when wind conditions are in the 20-33knt range or wave heights are >4ft.
 
 #### South Buoy No. 45007
-##### Weather Conditions
+
+![South Buoy Visualizations](/Images/S_Atmo.png)
+
+###### Weather Conditions
 In the south of the lake, October had the most hours of "Fair" weather with an average of 86.8 hours, but September had more total hours of "Fair" and "Changing to Fair" weather, with a combined average of 332.9 hours. October had the most average hours of "Poor/Rainy" weather, but August had more total hours of "Poor/Rainy" and "Changing to Poor" weather, with a combined average of 346.1 hours.
 
 Temperature-wise, August had the highest average temperature at 72.6 °F and May had the lowest at 50.7 °F.
 
-##### Surface Conditions
+###### Surface Conditions
+October experienced the highest average wind speeds at 14.1 knots, as well as the highest average wave height of 3.9ft. 
+May saw the lowest average wind speed at 7.8 knots, while July had the lowest average wave height of 1.4ft.
 
+###### Small Craft Advisories
+October experienced the most SCA's with an average of 20.4, while May had the lease amount with an average of 1.7.
 
 #### North Buoy No. 45002
 
-##### Weather Conditions
-I
-### Atmosphere and Lake Conditions - North Buoy No. 45002
-### Wind Conditions - South Buoy No. 45007
-### Wind Conditions - North Buoy No. 45002
+![North Buoy Visualizations](/Images/N_Atmo.png)
+###### Weather Conditions
+In the north of the lake, once again, October had the most hours of "Fair" weather with an average of 134.8 hours, but September had more total hours of "Fair" and "Changing to Fair" weather, with a combined average of 389.8 hours. October also had the most average hours of "Poor/Rainy" weather, but June had more total hours of "Poor/Rainy" and "Changing to Poor" weather, with a combined average of 464.8 hours.
+
+Temperature-wise, August had the highest average temperature at 68.5 °F and May had the lowest at 42.5 °F.
+
+###### Surface Conditions
+October experienced the highest average wind speeds at 14.2 knots, as well as the highest average wave height of 3.9ft.
+May saw the lowest average wind speed at 7.6 knots, while July had the lowest average wave height of 1.4ft.
+
+###### Small Craft Advisories
+October experienced the most SCA's with an average of 18.4, while May had the lease amount with an average of 3.5.
+
+
+### Wind Conditions
+
+#### South Buoy No. 45007
+#### North Buoy No. 45002
 
 
 ## Summary and Recommendations
