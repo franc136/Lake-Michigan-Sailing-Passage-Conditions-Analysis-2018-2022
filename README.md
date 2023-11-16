@@ -178,3 +178,11 @@ To take the analysis one step further, once September was identified as the most
 ![September Weekly Conditions](/Images/Sept_Smry.png)
 
 ### Passage Recommendations
+
+After reviewing the conditions by week, I would recommend that the best time for a passage from Chicago, IL to Mackinac Island, MI would be during the second week of September (9/8-9/14.)
+
+1. The second week had the most consistent average hours of ideal wind direction conditions.
+2. The second week had average hours of "Fair" weather ranging from high to average compared to the other weeks.
+3. The second week had below-average hours of "Poor/Rainy" weather.
+
+The only issue the second week may encounter is the possibility of above-average hours of (NNE) wind direction conditions on the north end of the passage, but for the reasons highlighted above, I would still recommend the second week as an overall recommendation.
