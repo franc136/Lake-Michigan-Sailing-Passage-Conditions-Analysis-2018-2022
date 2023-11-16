@@ -88,10 +88,15 @@ All visualizations were created in Tableau Public and the interactive dashboards
 To begin my analysis, I first looked at the general atmospheric conditions of the lake, along with surface conditions such as average wind speeds and wave heights. To define the weather conditions, each category represents a range of barometric pressures (hPa). The ranges come from displays typically used on a barometer face. Ranges as follows:
 
 Very Dry Weather (1049.8 - 1066.7 hPa)
+
 Fair Weather (1022.7 - 1049.8 hPa)
+
 Changing to Fair Weather (1015.9 -1022.7 hPa)
+
 Changing to Poor Weather (1009.1 - 1015.9 hPa)
+
 Poor/Rainy Weather (982.1 - 1009.1 hPa)
+
 Stormy Weather (965.1 - 982.1 hPa)
 
 A Small Craft Advisory is another indicator that was used to track conditions on the lake. A Small Craft Advisory is a weather warning broadcast by NOAA as a part of their marine forecast when wind conditions are in the 20-33knt range or wave heights are >4ft.
