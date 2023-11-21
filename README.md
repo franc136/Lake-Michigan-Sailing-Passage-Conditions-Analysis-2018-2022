@@ -56,7 +56,7 @@ The dates of the data fields pulled from these buoys typically ran from May thro
 
 ## Data Cleaning and Manipulation
 
-To clean the data, I used Microsoft Excel and logged all my changes in a [Changelog.](https://github.com/franc136/Lake-Michigan-Sailing-Passage-Conditions-Analysis-2018-2022/blob/main/NOAA_buoy_data_project_CHANGELOG.csv)
+All changes that were made to the original raw data files are documented in my [Changelog.](https://github.com/franc136/Lake-Michigan-Sailing-Passage-Conditions-Analysis-2018-2022/blob/main/NOAA_buoy_data_project_CHANGELOG.csv)
 
 Major data changes that were applied to all 10 data files:
 
