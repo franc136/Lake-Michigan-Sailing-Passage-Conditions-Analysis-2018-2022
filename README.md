@@ -175,7 +175,7 @@ The only issue with September is that it ranked second for most Small Craft Advi
 
 ### September Weekly Conditions Summary
 
-To take the analysis one step further, once September was identified as the most ideal month for the passage, I analyzed ideal and worst wind direction conditions as well as ideal and worst weather conditions by month. 
+To take the analysis one step further, once September was identified as the most ideal month for the passage, I analyzed ideal and worst wind direction conditions as well as ideal and worst weather conditions by week. 
 
 ![September Weekly Conditions](/Images/Sept_Smry.png)
 
